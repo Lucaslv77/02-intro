@@ -30,6 +30,21 @@ function Princ() {
   return (progresso / 4) * 100;
 }
 
+// Método para finalizar o formulário
+const finalizarFormulario = () => {
+    if (
+      nome && 
+      email && 
+      telefone && 
+      senha && 
+      termosAceitos
+    ) {
+      alert('Formulário enviado com sucesso!');
+    } else {
+      alert('Por favor, preencha todos os campos e aceite os termos.');
+    }
+  };
+
   return (
     <>
     <main className="flex">
@@ -67,36 +82,47 @@ function Princ() {
 				<div className="formulario flex flex-column">
 					<div className="progresso">
 						<label className="">Preencha os campos</label>
-						<progress value={calcularProgresso} max="100" style={{ width: '100%'}}></progress>
+						<progress value={calcularProgresso()} max="100" style={{ width: '100%' }}></progress>
+						<p>{calcularProgresso()}% completo</p>
 					</div>
 
 					<div className="flex flex-column">
-						<label for="nome">Digite seu nome</label>
-						<input type="text" id="nome" onChange={(e) => setNome(e.target.value)}/>
+						<label for="nome" htmlFor="nome">Digite seu nome</label>
+						<input  type="text"
+          						id="nome"
+          						value={nome}
+          						onChange={(e) => setNome(e.target.value)}/>
 					</div>
 
 					<div className="flex flex-column">
-						<label for="telefone" >Digite seu telefone</label>
-						<input type="text" id="telefone" onChange={(e) => setNome(e.target.value)}/>
+						<label for="telefone" htmlFor="telefone">Digite seu telefone</label>
+						<input  type="text"
+          						id="telefone"
+          						value={telefone}
+         	 					onChange={(e) => setTelefone(e.target.value)}/>
 					</div>
 
 					<div className="flex flex-column">
-						<label for="telefone">Digite seu e-mail</label>
-						<input type="text" id="telefone"onChange={(e) => setNome(e.target.value)} />
+						<label for="email" htmlFor="email">Digite seu e-mail</label>
+						<input type="email"
+          						id="email"
+          						value={email}
+          						onChange={(e) => setEmail(e.target.value)} />
 					</div>
 
 					<div className="flex flex-column">
-						<label for="telefone" htmlFor="senha">Digite seu senha</label>
-						<input  type={senhaVisivel ? 'text' : 'password'} id="senha" />
+						<label for="senha" htmlFor="senha">Digite seu senha</label>
+						<input  type={senhaVisivel ? 'text' : 'password'} id="senha" value={senha} onChange={(e) => setSenha(e.target.value)}/>
 						<button class="mostra-senha" type="button" onClick={toggleSenhaVisivel} onChange={(e) => setNome(e.target.value)}>Exibir senha</button>
 					</div>
 
 					<div className="flex termos">
 						<input
 							type="checkbox"
-							name="aceita-termos"
 							id="aceita-termos"
-							onChange={handleChange} />
+							checked={termosAceitos}
+							onChange={(e) => setTermosAceitos(e.target.checked)}
+						  />
 						<label for="aceita-termos">
 							Eu li, estou ciente das condições de tratamento dos
 							meus dados pessoais e dou meu consentimento, quando
@@ -105,7 +131,7 @@ function Princ() {
 					</div>
 
 					<div className="flex">
-						<button className="botao" disabled={!termosAceitos}>
+						<button className="botao" type="button" onClick={finalizarFormulario} disabled={!termosAceitos}>
 							Aceite os termos
 						</button>
 					</div>
