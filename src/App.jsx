@@ -1,18 +1,20 @@
 import { useState } from 'react'
-import './App.css'
-import Padrao from './padrao' 
-import Somar from './somar'
-import Calculaidade from './calculaidade'
+import './components/style.css';
+
+import Princ from './components/Princ';
+
 
 function App() {
+  const [count, setCount] = useState(0)
 
   return (
-  <div>
-    <Padrao/>
-    <Somar/>
-    <Calculaidade/>
-  </div>
-  )
+    <>
+    <div>
+        
+        <Princ/>
+    </div>
+    </>
+)
 }
 
 export default App
